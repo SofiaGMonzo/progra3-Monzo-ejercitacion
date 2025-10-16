@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { StyleSheet } from "react-native";
 import { FlatList } from "react-native";
 import { View, Text } from "react-native";
+import Card from "../Components/Card/Card";
 
 class ProductsAll extends Component{
     constructor(){

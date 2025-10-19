@@ -115,7 +115,7 @@ class ProductsAll extends Component{
     
 render(){
     return(
-        <View style={StyleSheet.flatlist}>
+        <View style={styles.flatlist}>
     
              <FlatList
                     data={this.state.lista}

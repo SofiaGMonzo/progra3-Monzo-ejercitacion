@@ -4,7 +4,7 @@ import { Pressable, Text, View, StyleSheet } from "react-native"
 function Profile(props) {
     return (
         <View style={styles.container}>
-            <Pressable style={styles.button} onPress={() => props.navigation.navigate('Login')}>
+            <Pressable style={styles.boton} onPress={() => props.navigation.navigate('Login')}>
                 <Text style={styles.text}>Desloguearse</Text>
             </Pressable>
         </View>
@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center'
     },
-    button: {
+    boton: {
         backgroundColor: '#f080a1',
         padding: 12,
         borderRadius: 10,

@@ -10,7 +10,6 @@ import Home from './src/screens/Home';
 import Login from './src/screens/Login';
 import HomeMenu from './src/Components/HomeMenu/HomeMenu';
 
-
 const Stack = createNativeStackNavigator();
 
 export default function App() {

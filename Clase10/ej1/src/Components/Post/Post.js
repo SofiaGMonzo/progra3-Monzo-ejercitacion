@@ -1,15 +1,13 @@
-import React, { Component } from "react";
+import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 
-class Post extends Component {
-    render() {
-        return (
-            <View style={styles.postContainer}>
-                <Text style={styles.postEmail}>{this.props.data.email}</Text>
-                <Text style={styles.postText}>{this.props.data.texto}</Text>
-            </View>
-        );
-    }
+function Post(props) {
+    return (
+        <View style={styles.postContainer}>
+            <Text style={styles.mail}>{props.data.email}</Text>
+            <Text style={styles.texto}>{props.data.texto}</Text>
+        </View>
+    );
 }
 
 const styles = StyleSheet.create({
@@ -19,11 +17,11 @@ const styles = StyleSheet.create({
         padding: 10,
         borderRadius: 10,
     },
-    postEmail: {
+    mail: {
         fontWeight: "bold",
         color: "#d63384",
     },
-    postText: {
+    texto: {
         marginTop: 6,
         fontSize: 16,
         color: "#333",

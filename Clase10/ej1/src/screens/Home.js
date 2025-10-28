@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { db } from "../firebase/config";
 import { FlatList, Text, View, StyleSheet } from "react-native";
+import Post from "../Components/Post/Post";
+
 
 class Home extends Component {
     constructor(props) {
@@ -33,12 +35,7 @@ class Home extends Component {
                 <FlatList
                     data={this.state.posts}
                     keyExtractor={(item) => item.id}
-                    renderItem={({ item }) => (
-                        <View style={styles.postContainer}>
-                            <Text style={styles.postEmail}>{item.data.email}</Text>
-                            <Text style={styles.postText}>{item.data.texto}</Text>
-                        </View>
-                    )}
+                    renderItem={({ item }) => <Post data={item.data} />}
                 />
             </View>
         );

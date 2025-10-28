@@ -1,60 +1,50 @@
-import React, { Component } from "react"
-import { Pressable, Text, View, StyleSheet, TextInput } from "react-native"
-import { auth, db} from "../firebase/config";
+import React, { Component } from "react";
+import { Pressable, Text, View, StyleSheet, TextInput } from "react-native";
+import { auth, db } from "../firebase/config";
 
-class nuevoPost extends Component {
+class NuevoPost extends Component {
     constructor(props) {
         super(props);
         this.state = {
             email: "",
-            texto: ''
-        }
+            texto: ""
+        };
     }
 
-    onSubmit(email, texto){
-        auth.createUserWithEmailAndPassword(email, texto)
-            .then( response => {
-                db.collection('posts').add({
-                    email: email,
-                    texto: this.state.texto,
-                    createdAt: Date.now(),
-                })
-                .then(response => console.log(response) )
-                .catch( e => console.log(e))
-            })     
-             .catch( e => console.log(e))
-        
-          };
+    onSubmit() {
+        db.collection('posts').add({
+            email: auth.currentUser.email,
+            texto: this.state.texto,
+            createdAt: Date.now()
+        })
+            .then(() => {
+                this.setState({ texto: "" });
+                console.log('publicacion creado con éxito');
+            })
+            .catch(e => console.log('Error al crear la publicacion:', e));
+        this.props.navigation.navigate("Home")
+    }
 
     render() {
         return (
-            <View>
-                <Text>NuevoPost</Text>
+            <View style={styles.container}>
+                <Text>Nuevo Post</Text>
 
                 <TextInput
                     style={styles.texto}
-                    keyboardType='email-address'
-                    placeholder='Email'
-                    onChangeText={text => this.setState({ email: text })}
-                    value={this.state.email}
-                />
-                <TextInput
-                    style={styles.texto}
-                    keyboardType='default'
-                    placeholder='texto'
+                    placeholder="Publica algo"
                     onChangeText={text => this.setState({ texto: text })}
                     value={this.state.texto}
                 />
 
-                <Pressable onPress={() => this.onSubmit(this.state.email, this.state.texto)} >
-                    <Text style={styles.boton2}>Publica</Text>
+                <Pressable onPress={() => this.onSubmit()} style={styles.boton2}>
+                    <Text style={styles.text}>Publicar</Text>
                 </Pressable>
 
                 <Text>{this.state.email}</Text>
                 <Text>{this.state.texto}</Text>
-               
             </View>
-        )
+        );
     }
 }
 
@@ -65,23 +55,13 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center'
     },
-    boton: {
+    boton2: {
         backgroundColor: '#f4a9c6',
         padding: 12,
         marginVertical: 10,
         borderRadius: 10,
         width: '70%',
         alignItems: 'center'
-    },
-    boton2: {
-        backgroundColor: '#f4a9c6',
-        padding: 12,
-        marginVertical: 10,
-        borderRadius: 10,
-        width: '100%',
-        alignItems: 'center',
-        color: '#fff',
-        fontWeight: 'bold'
     },
     text: {
         color: '#fff',
@@ -96,6 +76,6 @@ const styles = StyleSheet.create({
         marginVertical: 8,
         backgroundColor: '#fff'
     }
-})
+});
 
-export default nuevoPost;
+export default NuevoPost;

@@ -13,31 +13,31 @@ class Login extends Component {
         }
     }
 
-    onSubmit(email, password){
-    if(!email.includes("@")){
-         this.setState({error: 'El mail esta mal formateado'}) 
-         return
-     }
-    if(password.length < 6){
-        this.setState({error: 'La contraseña debe tener un minimo de 6 caracteres'}) 
-        return
-    }
-    auth.signInWithEmailAndPassword(email, password)
-    .then((response) => {
-        this.setState({loggedIn: true});
-        this.props.navigation.navigate('HomeMenu', { screen: 'Home' })
-    })
-    .catch(error => {
-      this.setState({error: 'Credenciales inválidas.'})
-      
-    })
- };
+    onSubmit(email, password) {
+        if (!email.includes("@")) {
+            this.setState({ error: 'El mail esta mal formateado' })
+            return
+        }
+        if (password.length < 6) {
+            this.setState({ error: 'La contraseña debe tener un minimo de 6 caracteres' })
+            return
+        }
+        auth.signInWithEmailAndPassword(email, password)
+            .then((response) => {
+                this.setState({ loggedIn: true });
+                this.props.navigation.navigate('HomeMenu', { screen: 'Home' })
+            })
+            .catch(error => {
+                this.setState({ error: 'Credenciales inválidas.' })
+
+            })
+    };
 
     render() {
         return (
             <View style={styles.container}>
                 <Text style={styles.titulo}>Login</Text>
-                
+
 
                 <TextInput
                     style={styles.texto}
@@ -105,7 +105,8 @@ const styles = StyleSheet.create({
         width: '100%',
         alignItems: 'center',
         color: '#fff',
-        fontWeight: 'bold'},
+        fontWeight: 'bold'
+    },
 
     text: {
         color: '#fff',
